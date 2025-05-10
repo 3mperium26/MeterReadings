@@ -30,7 +30,15 @@ namespace MeterReading.Infrastructure.CSVParsing
             var csv = new CsvReader(reader, csvConfig);
 
             await csv.ReadAsync();
-            csv.ReadHeader();
+            if (csv.Parser.CharCount < 1)
+            {
+                _logger.LogError("Empty CSV.");
+            }
+            else 
+            {   
+                csv.ReadHeader();
+                if (csv.HeaderRecord is null) _logger.LogError("Missing Header.");
+            }
 
             int rowNumber = 1;
             while (await csv.ReadAsync())
@@ -46,6 +54,12 @@ namespace MeterReading.Infrastructure.CSVParsing
                     accountIdCSV = csv.GetField<string>("AccountId");
                     dateTimeCSV = csv.GetField<string>("MeterReadingDateTime");
                     valueCSV = csv.GetField<string>("MeterReadValue");
+
+                    if (string.IsNullOrWhiteSpace(accountIdCSV) || string.IsNullOrWhiteSpace(dateTimeCSV) || string.IsNullOrWhiteSpace(valueCSV))
+                    {
+                        parseError = "One or more fields are empty.";
+                        _logger.LogWarning("Empty field detected at data row {RowNumber}.", rowNumber);
+                    }
                 }
                 catch (CsvHelper.MissingFieldException ex)
                 {
