@@ -18,7 +18,7 @@ namespace MeterReading.Domain.Entities
         public Account(int accountId, string firstName, string lastName)
         {
             #region Validation
-            if (AccountId <= 0) throw new ValidationException($"Invalid Account Id: '{AccountId}'");
+            if (accountId <= 0) throw new ValidationException($"Invalid Account Id: '{accountId}'");
             if (string.IsNullOrWhiteSpace(firstName) || string.IsNullOrWhiteSpace(lastName)) throw new ValidationException("First name / Last name cannot be empty.");
             #endregion
             
@@ -43,7 +43,7 @@ namespace MeterReading.Domain.Entities
             var newMeterReading = MeterReading.Create(this.AccountId, meterReadingDateTime, iMeterReadValue);
             if (_meterReadings.Any(r => r.Equals(newMeterReading)))
             {
-                throw new ValidationException("Duplicate meter reading for this account at this date and value already exists.");
+                throw new ValidationException("Duplicate meter reading.");
             }
             #endregion
 

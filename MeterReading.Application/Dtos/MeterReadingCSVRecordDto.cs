@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MeterReading.Application.Dtos
+﻿namespace MeterReading.Application.Dtos
 {
     public record MeterReadingCSVRecordDto(
             int RowNumber,

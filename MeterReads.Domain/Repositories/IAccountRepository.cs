@@ -10,5 +10,6 @@ namespace MeterReading.Domain.Repositories
         Task UpdateAsync(Account account, CancellationToken cancellationToken = default);
         Task<bool> ExistsAsync(int accountId, CancellationToken cancellationToken = default);
         Task<List<int>> GetAllAccountIdsAsync(CancellationToken cancellationToken = default);
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }
