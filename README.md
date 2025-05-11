@@ -46,7 +46,7 @@ The solution is organized into the following projects:
     * SQL Server instance (e.g., LocalDB, SQL Server Express)
 2.  **Clone the repository:**
     ```bash
-    git clone <repository-url>
+    git clone [<repository-url>](https://github.com/3mperium26/MeterReadings)
     cd MeterReadings
     ```
 3.  **Configure Connection String:**
